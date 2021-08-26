@@ -1,38 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IAuthenticationUser } from 'src/app/Interface/IAuthenticationUser';
 import { UserService } from 'src/app/Services/User.service';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
+import { IUser } from 'src/app/Interface/IUser';
+import { first } from 'rxjs/operators';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+
 export class LoginComponent implements OnInit {
-UserID:number = 0;
 
-LoginParam! : IAuthenticationUser;
-username!:string;
-password!:string;
-UserForm = this.FB.group({
-  username:['',Validators.required],
-  password:['',Validators.required]
-})
-
-  constructor(private FB:FormBuilder,private userService:UserService,private router:Router) { }
+UserForm!: FormGroup;
+loading = false;
+submitted = false;
+  constructor(private FB:FormBuilder,
+    private userService:UserService,
+    private router:Router,
+    private route:ActivatedRoute)
+  { }
 
   ngOnInit(): void {
-
+    this.UserForm = this.FB.group({
+      username:['',Validators.required],
+      password:['',Validators.required]
+    })
   }
 
-AuthorizeUserLogin(Model:IAuthenticationUser)
+AuthorizeUserLogin(Model:IUser)
 {
- this.userService.AuthorizeUserLogin(Model).subscribe(data => {
-   this.LoginParam = Model;
-   this.userService.AccessToken = this.LoginParam.token;
-   this.router.navigate(['/homePage']);
-   console.log(data);
-  });
+  this.submitted = true;
+  if(this.UserForm.invalid){
+    return;
+  }
+this.loading = true;
+//Pipes are simple functions to use in template expressions to accept an input value and return a transformed value.
+//Pipes are useful because we can use them throughout our application, while only declaring each pipe once.
+ this.userService.AuthorizeUserLogin(Model).pipe(first()).subscribe({next:() =>{
+   console.log(Model);
+   // get return url from query parameters or default to home page
+   const returnUrl = this.route.snapshot.queryParams['returnUrl']||'/';
+   this.router.navigateByUrl(returnUrl);
+
+
+ },
+ error:error =>{
+   this.loading = false;
+ }
+});
 }
 
 }
