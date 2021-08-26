@@ -1,0 +1,11 @@
+<p>login works!</p>
+
+<form [formGroup]="UserForm">
+<label for="username">Username</label> &nbsp; <input type="text" name="" formControlName="username">
+<br>
+<br>
+<label for="password">Password</label> &nbsp; <input  type="text" name="" formControlName="password">
+<br>
+<br>
+<button type="submit" (click)="AuthorizeUserLogin(UserForm.value)">LOGIN</button>
+</form>
