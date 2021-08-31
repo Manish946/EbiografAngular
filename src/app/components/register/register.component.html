@@ -1,0 +1,21 @@
+<p>register works!</p>
+<form [formGroup]="RegisterForm">
+  <label for="username">Username</label> &nbsp; <input type="text" name="" formControlName="username">
+  <br>
+  <br>
+  <label for="Firstname">First Name</label> &nbsp; <input type="text" name="" formControlName="firstname">
+  <br>
+  <br>
+  <label for="Lastname">Last Name</label> &nbsp; <input type="text" name="" formControlName="lastname">
+  <br>
+  <br>
+  <label for="emailaddress">Email Address</label> &nbsp; <input type="text" name="" formControlName="emailaddress">
+  <br>
+  <br>
+  <label for="Phone">Phone</label> &nbsp; <input type="number" name="" formControlName="phone">
+  <br>
+  <br>
+
+  <button [disabled]="loading" type="submit">Register</button>
+  <a routerLink="../login" >Cancel</a>
+</form>

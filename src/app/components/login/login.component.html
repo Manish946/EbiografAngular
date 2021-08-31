@@ -1,11 +1,37 @@
 <p>login works!</p>
+<div class="card">
+  <h4 class="card-header">login</h4>
+  <div class="card-body">
+    <form [formGroup]="UserForm" (ngSubmit)="AuthorizeUserLogin(UserForm.value)">
+      <div class="form-group">
+        <label for="username">Username</label> &nbsp;
+        <input type="text" name="username" placeholder="Username" required formControlName="username" class="form-control" [ngClass]="{'is-invalid': submitted && UserForm.value.username.errors }"/>
 
-<form [formGroup]="UserForm">
-<label for="username">Username</label> &nbsp; <input type="text" name="" formControlName="username">
-<br>
-<br>
-<label for="password">Password</label> &nbsp; <input  type="text" name="" formControlName="password">
-<br>
-<br>
-<button type="submit" (click)="AuthorizeUserLogin(UserForm.value)">LOGIN</button>
-</form>
+        <div *ngIf="submitted && UserForm.value.username.errors">
+          <div *ngIf="UserForm.value.username.errors?.required" class="invalid-feedback">
+            Username is required.
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="form-group">
+        <label for="password">Password</label> &nbsp;
+        <input type="password" name="password" placeholder="Password" formControlName="password" required class="form-control"/>
+        <div *ngIf="submitted && UserForm.value.password.errors">
+          <div *ngIf="UserForm.value.password.errors.required">
+            Password is required.
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">LOGIN</button>
+        &nbsp; &nbsp;
+        <a routerLink="../register" class="btn btn-link">Register</a>
+      </div>
+
+    </form>
+  </div>
+</div>
