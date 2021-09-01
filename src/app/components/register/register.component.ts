@@ -13,7 +13,8 @@ export class RegisterComponent implements OnInit {
     RegisterForm!:FormGroup;
     loading = false;
     submitted = false;
-
+    registerError = false;
+    showErrorMessage!:string;
   constructor(
     private formBuilder:FormBuilder,
     private route:ActivatedRoute,
@@ -49,6 +50,8 @@ onRegister()
   },
   error:error=>{
     this.loading = false;
+    this.registerError = true;
+  this.showErrorMessage = error.error.message;
   }
 })
 }

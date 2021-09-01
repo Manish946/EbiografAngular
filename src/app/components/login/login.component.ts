@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
 UserForm!: FormGroup;
 loading = false;
 submitted = false;
-loginIncorrectMessage!:string;
+loginError = false;
+showErrorMessage!:string;
   constructor(private FB:FormBuilder,
     private userService:UserService,
     private router:Router,
@@ -56,7 +57,8 @@ this.loading = true;
  },
  error:error =>{
    this.loading = false;
-    console.log(error)
+   this.loginError = true;
+   this.showErrorMessage = error.error.message;
  }
 });
 }
