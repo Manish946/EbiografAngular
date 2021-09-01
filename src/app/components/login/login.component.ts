@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
 UserForm!: FormGroup;
 loading = false;
 submitted = false;
+loginIncorrectMessage!:string;
   constructor(private FB:FormBuilder,
     private userService:UserService,
     private router:Router,
@@ -29,12 +30,16 @@ submitted = false;
       username:['',Validators.required],
       password:['',Validators.required]
     })
+
+
   }
+get authForm(){return this.UserForm.controls}
 
 
 AuthorizeUserLogin(Model:IUser)
 {
   this.submitted = true;
+
   if(this.UserForm.invalid){
     return;
   }
@@ -51,6 +56,7 @@ this.loading = true;
  },
  error:error =>{
    this.loading = false;
+    console.log(error)
  }
 });
 }

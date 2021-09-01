@@ -1,12 +1,13 @@
 export interface IUser
 {
     userID:number,
-    username:string,
-    firstname:string,
-    lastname:string,
-    emailaddress:string,
-    datecreated:Date,
-    Phone:string
+    userName:string,
+    firstName:string,
+    lastName:string,
+    emailAddress:string,
+    dateCreated:Date,
+    phone:string,
+    token:string
 
 
 }

@@ -13,14 +13,21 @@ export class UserService{
   public user!: Observable<IUser>;
   // This will be used to save data locally for token usages.
    private userSubject!:BehaviorSubject<IUser>;
-  //BaseURL TO MY API.
-  baseUrl:string="https://localhost:44378/api/User/authenticate"
+  //URL TO MY API Authentication.
+  authUrl:string="https://localhost:44378/api/User/authenticate"
+  // BaseURL
+  baseUrl:string="https://localhost:44378/api/User"
   constructor(private http:HttpClient,private router:Router)// Creating a property with Variable http
   {
+    // Returns the localstored user and added in userSubject.
       this.userSubject = new BehaviorSubject<IUser>(JSON.parse(localStorage.getItem('user')!));
       this.user = this.userSubject.asObservable();
   }
 
+  // Getting current user value.
+  public get userValue():IUser{
+     return this.userSubject.value;
+  }
    httpOptions = {
    Headers: new HttpHeaders({'content-Type' : 'application/json'})
    }
@@ -28,11 +35,14 @@ export class UserService{
 
    AuthorizeUserLogin(model:IUser):Observable<IUser>
    {
-      return this.http.post<IUser>(this.baseUrl,model)
+      return this.http.post<IUser>(this.authUrl,model)
       .pipe(map(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('user',JSON.stringify(user));
             this.userSubject.next(user);
+
+
+
             return user;
       })) ;
 
@@ -43,6 +53,10 @@ export class UserService{
      localStorage.removeItem('user');
      this.userSubject.next(null!);
      this.router.navigate(['/login']);
+   }
+
+   register(user:IUser){
+      return this.http.post(`${this.baseUrl}/register`,user)
    }
 }
 

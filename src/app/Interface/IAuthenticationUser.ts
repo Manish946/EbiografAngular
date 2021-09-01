@@ -1,5 +1,5 @@
 export interface IAuthenticationUser
 {
-    username:string,
+    userName:string,
     password:string
 }
