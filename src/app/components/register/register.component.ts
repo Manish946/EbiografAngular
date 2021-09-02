@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
        username:['',Validators.required],
        password:['',Validators.required],
        emailaddress:['',Validators.required],
-       phone:['',Validators.required]
+       phone:[Number,Validators.required]
     });
   }
 
@@ -44,6 +44,7 @@ onRegister()
     return;
   }
   this.loading = true;
+  this.RegisterForm.value.phone = this.RegisterForm.value.phone.toString();
   this.userService.register(this.RegisterForm.value)
   .pipe(first()).subscribe({next:()=>{
     this.router.navigate(['../login'],{relativeTo: this.route});

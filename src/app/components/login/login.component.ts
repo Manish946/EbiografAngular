@@ -51,7 +51,11 @@ this.loading = true;
    console.log(Model);
    // get return url from query parameters or default to home page
    const returnUrl = this.route.snapshot.queryParams['returnUrl']||'/';
-   this.router.navigateByUrl(returnUrl);
+   this.router.navigateByUrl(returnUrl).then(() =>
+   {
+
+     //window.location.reload();
+   });
  },
  error:error =>{
    this.loading = false;

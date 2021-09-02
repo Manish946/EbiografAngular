@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<p>profile works!</p>
+<nav>
+  <div class="nav nav-tabs" >
+    <button class="nav-link active"  type="button" routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >My Profile</button>
+    <button class="nav-link active" type="button" [routerLink]="['/profile', {outlets: {'profile-content': ['edit-profile']}}]" >Edit Profile</button>
+    <button class="nav-link active" type="button" >My History</button>
+  </div>
+</nav>
+
+<div>
+  <router-outlet name="profile-content"></router-outlet>
+</div>

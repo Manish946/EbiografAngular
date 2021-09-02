@@ -1,10 +1,15 @@
-<div>
+<div  >
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <div class="navbar-nav">
+    <div class="navbar-nav" >
         <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-        <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+        <a class="nav-item nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
+        <div *ngIf="user">
+        <a class="nav-item nav-link" style="color: red;">{{username}}</a>
+
+        </div>
         <a class="nav-item nav-link" *ngIf="islogin" (click)="logoutUser()">Logout</a>
         <a class="nav-item nav-link" *ngIf="!islogin" (click)="loginUser()">Login</a>
+        <a class="nav-item nav-link" *ngIf="!islogin" (click)="registerUser()">Register</a>
     </div>
   </nav>
 </div>

@@ -7,16 +7,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/noauth.guard';
+import { ProfileComponent } from './components/Content/profile/profile.component';
+import { AboutComponent } from './components/Content/about/about.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { EditProfileComponent } from './components/Profile-content/edit-profile/edit-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
     RegisterComponent,
-    NavigationComponent
+    ProfileComponent,
+    AboutComponent,
+    NavbarComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
