@@ -7,12 +7,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { AuthGuard } from './guards/auth.guard';
+import { NotAuthGuard } from './guards/noauth.guard';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +25,8 @@ import { RegisterComponent } from './components/register/register.component';
     ReactiveFormsModule
 
   ],
-  providers: [],
+  providers: [AuthGuard,
+    NotAuthGuard,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

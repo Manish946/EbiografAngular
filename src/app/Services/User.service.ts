@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, EMPTY, Observable} from 'rxjs';
 import { IAuthenticationUser } from '../Interface/IAuthenticationUser';
 import { IUser } from '../Interface/IUser';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import {map} from 'rxjs/operators'
 @Injectable({
   providedIn:'root'
@@ -17,7 +17,8 @@ export class UserService{
   authUrl:string="https://localhost:44378/api/User/authenticate"
   // BaseURL
   baseUrl:string="https://localhost:44378/api/User"
-  constructor(private http:HttpClient,private router:Router)// Creating a property with Variable http
+  localUser!:IUser;
+  constructor(private http:HttpClient,private router:Router,private route:ActivatedRoute)// Creating a property with Variable http
   {
     // Returns the localstored user and added in userSubject.
       this.userSubject = new BehaviorSubject<IUser>(JSON.parse(localStorage.getItem('user')!));
@@ -40,9 +41,6 @@ export class UserService{
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('user',JSON.stringify(user));
             this.userSubject.next(user);
-
-
-
             return user;
       })) ;
 
@@ -52,7 +50,17 @@ export class UserService{
      // remove user from local storage and set current user to null
      localStorage.removeItem('user');
      this.userSubject.next(null!);
-     this.router.navigate(['/login']);
+     this.router.navigate(['/home'])
+   }
+   isAuthenticated()
+   {
+    this.localUser = this.userValue;
+    if(this.localUser != null){
+      return true;
+    }
+    else{
+      return false;
+    }
    }
 
    register(user:IUser){
