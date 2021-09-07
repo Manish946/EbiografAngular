@@ -4,7 +4,9 @@ import { BehaviorSubject, EMPTY, Observable} from 'rxjs';
 import { IAuthenticationUser } from '../Interface/IAuthenticationUser';
 import { IUser } from '../Interface/IUser';
 import { Router,ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import {map} from 'rxjs/operators'
+import {UserTest}  from '../Interface/UserTest';
 @Injectable({
   providedIn:'root'
   })
@@ -16,7 +18,6 @@ export class UserService{
   //URL TO MY API Authentication.
   authUrl:string="https://localhost:44378/api/User/authenticate"
   // BaseURL
-  baseUrl:string="https://localhost:44378/api/User"
   localUser!:IUser;
   constructor(private http:HttpClient,private router:Router,private route:ActivatedRoute)// Creating a property with Variable http
   {
@@ -64,7 +65,37 @@ export class UserService{
    }
 
    register(user:IUser){
-      return this.http.post(`${this.baseUrl}/register`,user)
+      return this.http.post(`${environment.baseUrl}User/register`,user)
+   }
+
+   update(id:number, user:IUser){
+      return this.http.put(`${environment.baseUrl}/User/${id}`,user).pipe
+      (map(x =>  {
+        // update stored user if the logged in user updated their own record.
+        if(id == this.userValue.userID){
+          //update local storage user data.
+          //Three dots mean that there method can get as parameters as much argument of type Object as it likes.
+          const Localuser = {...this.userValue,...user};
+          localStorage.setItem('user',JSON.stringify(Localuser));
+          // publish updated user to subscribers
+          this.userSubject.next(Localuser);
+        }
+        return x;
+      }))
+   }
+
+   delete(id: number) {
+    return this.http.delete(`${environment.baseUrl}/User/${id}`)
+        .pipe(map(x => {
+            // auto logout if the logged in user deleted their own record
+            if (id == this.userValue.userID) {
+                this.logout();
+            }
+            return x;
+        }));
+}
+   getUserById(id:number){
+     return this.http.get<IUser>(`${environment.baseUrl}/User/${id}`);
    }
 }
 

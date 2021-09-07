@@ -7,17 +7,21 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/Content/profile/profile.component';
-import { EditProfileComponent } from './components/Profile-content/edit-profile/edit-profile.component';
+import { EditProfileComponent } from './components/Content/Profile-content/edit-profile/edit-profile.component';
+import { MyprofileComponent } from './components/Content/Profile-content/myprofile/myprofile.component';
+import { MyHistoryComponent } from './components/Content/Profile-content/my-history/my-history.component';
 const routes: Routes = [
 {path:'home', component:HomeComponent},
 {path:'',redirectTo: 'home', pathMatch:'full'},
 {path:"login",component:LoginComponent},
 {path:'register',component:RegisterComponent},
-{path:'app',component:AppComponent},
 {path:'profile',component:ProfileComponent,canActivate:[AuthGuard],children:[
-  {
-    path:'edit-profile',component:EditProfileComponent,outlet:'profile-content'
-  }
+
+    {path:'myprofile',component:MyprofileComponent,outlet:'profile-content'},
+    {path:'edit-profile',component:EditProfileComponent,outlet:'profile-content'},
+    {path:'my-history',component:MyHistoryComponent,outlet:'profile-content'},
+    {path:'',redirectTo:'/profile/(profile-content:myprofile)',pathMatch:'full'}
+
 ]}
 
 ];
