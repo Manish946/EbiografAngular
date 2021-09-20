@@ -5,6 +5,7 @@ import { UserService } from 'src/app/Services/User.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import { IUser } from 'src/app/Interface/IUser';
 import { first } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -19,11 +20,13 @@ UserForm!: FormGroup;
 loading = false;
 submitted = false;
 loginError = false;
+username!:string;
 showErrorMessage!:string;
   constructor(private FB:FormBuilder,
     private userService:UserService,
     private router:Router,
-    private route:ActivatedRoute)
+    private route:ActivatedRoute,
+    private _snackBar: MatSnackBar)
   { }
 
   ngOnInit(): void {
@@ -37,7 +40,7 @@ showErrorMessage!:string;
 get authForm(){return this.UserForm.controls}
 
 
-AuthorizeUserLogin(Model:IUser)
+async AuthorizeUserLogin(Model:IUser)
 {
   this.submitted = true;
 
@@ -47,23 +50,31 @@ AuthorizeUserLogin(Model:IUser)
 this.loading = true;
 //Pipes are simple functions to use in template expressions to accept an input value and return a transformed value.
 //Pipes are useful because we can use them throughout our application, while only declaring each pipe once.
- this.userService.AuthorizeUserLogin(Model).pipe(first()).subscribe({next:() =>{
+ (
+    //Pipes are simple functions to use in template expressions to accept an input value and return a transformed value.
+    //Pipes are useful because we can use them throughout our application, while only declaring each pipe once.
+    await this.userService.AuthorizeUserLogin(Model)).pipe(first()).subscribe({next:() =>{
    console.log(Model);
+   this.username = Model.userName;
    // get return url from query parameters or default to home page
-   const returnUrl = this.route.snapshot.queryParams['returnUrl']||'/';
-   this.router.navigateByUrl(returnUrl).then(() =>
-   {
+  const returnUrl = this.route.snapshot.queryParams['returnUrl']||'/';
+  this.router.navigateByUrl(returnUrl);
 
-     //window.location.reload();
-   });
  },
  error:error =>{
    this.loading = false;
    this.loginError = true;
-   
-   this.showErrorMessage = error.error.message;
+
+   this.showErrorMessage = error;
  }
 });
+
+
 }
 
+openSnackBar(message:string) {
+  this._snackBar.open(message), {
+    duration: 2 * 1000,
+  };
+}
 }

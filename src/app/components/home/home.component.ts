@@ -8,11 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  user!:IUser;
-  constructor(private userService:UserService, private router:Router){
-    //gets this current user.
-    this.userService.user.subscribe(x=> this.user = x);
-    this.user = this.userService.userValue;
+
+  constructor(private router:Router){
+
   }
   ngOnInit(): void {
 

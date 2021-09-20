@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { IUser } from 'src/app/Interface/IUser';
-import { UserTest } from 'src/app/Interface/UserTest';
 import { UserService } from 'src/app/Services/User.service';
 
 @Component({
@@ -48,7 +47,7 @@ export class EditProfileComponent implements OnInit {
     return this.editForm.controls;
   }
 
-   onSubmit(){
+ async  onSubmit(){
      this.submitted = true;
      // Stops here if form is invalid.
      if(this.editForm.invalid){
@@ -57,7 +56,7 @@ export class EditProfileComponent implements OnInit {
      }
    this.loading =true;
    this.editForm.value.dateCreated = this.user.dateCreated;
-   this.userService.update(this.id, this.editForm.value).pipe
+   (await this.userService.update(this.id, this.editForm.value)).pipe
    (first()).subscribe({
      next:() => {
        console.log("UPDATE SUCCESSFUL"),{keepAfterRouteChange :true};

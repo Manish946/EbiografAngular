@@ -4,7 +4,7 @@
         <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
         <a class="nav-item nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
         <div *ngIf="user">
-        <a class="nav-item nav-link" style="color: red;">{{username}}</a>
+       <a class="nav-item nav-link" style="color: red;">{{username}}</a>
 
         </div>
         <a class="nav-item nav-link" *ngIf="islogin" (click)="logoutUser()">Logout</a>

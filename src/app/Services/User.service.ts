@@ -5,13 +5,12 @@ import { IAuthenticationUser } from '../Interface/IAuthenticationUser';
 import { IUser } from '../Interface/IUser';
 import { Router,ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import {map} from 'rxjs/operators'
-import {UserTest}  from '../Interface/UserTest';
+import {map} from 'rxjs/operators';
 @Injectable({
   providedIn:'root'
   })
 
-export class UserService{
+ export class UserService{
   public user!: Observable<IUser>;
   // This will be used to save data locally for token usages.
    private userSubject!:BehaviorSubject<IUser>;
@@ -22,32 +21,35 @@ export class UserService{
   constructor(private http:HttpClient,private router:Router,private route:ActivatedRoute)// Creating a property with Variable http
   {
     // Returns the localstored user and added in userSubject.
-      this.userSubject = new BehaviorSubject<IUser>(JSON.parse(localStorage.getItem('user')!));
+      this.userSubject =  new BehaviorSubject<IUser>(JSON.parse(localStorage.getItem('user')!));
       this.user = this.userSubject.asObservable();
   }
 
   // Getting current user value.
-  public get userValue():IUser{
-     return this.userSubject.value;
+   public  get  userValue():IUser{
+     return  this.userSubject.value;
   }
+
+
+
    httpOptions = {
    Headers: new HttpHeaders({'content-Type' : 'application/json'})
    }
 
 
-   AuthorizeUserLogin(model:IUser):Observable<IUser>
+  async AuthorizeUserLogin(model:IUser):Promise<Observable<IUser>>
    {
-      return this.http.post<IUser>(this.authUrl,model)
+      return await this.http.post<IUser>(this.authUrl,model)
       .pipe(map(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('user',JSON.stringify(user));
             this.userSubject.next(user);
 
-            return user;
+            return  user;
       })) ;
    }
 
-   logout(){
+  logout(){
      // remove user from local storage and set current user to null
      localStorage.removeItem('user');
      this.userSubject.next(null!);
@@ -64,12 +66,12 @@ export class UserService{
     }
    }
 
-   register(user:IUser){
-      return this.http.post(`${environment.baseUrl}User/register`,user)
+ async  register(user:IUser){
+      return await this.http.post(`${environment.baseUrl}/User/register`,user)
    }
 
-   update(id:number, user:IUser){
-      return this.http.put(`${environment.baseUrl}/User/${id}`,user).pipe
+   async   update(id:number, user:IUser){
+      return await this.http.put(`${environment.baseUrl}/User/${id}`,user).pipe
       (map(x =>  {
         // update stored user if the logged in user updated their own record.
         if(id == this.userValue.userID){
@@ -84,8 +86,8 @@ export class UserService{
       }))
    }
 
-   delete(id: number) {
-    return this.http.delete(`${environment.baseUrl}/User/${id}`)
+  async delete(id: number) {
+    return await this.http.delete(`${environment.baseUrl}/User/${id}`)
         .pipe(map(x => {
             // auto logout if the logged in user deleted their own record
             if (id == this.userValue.userID) {
@@ -95,7 +97,7 @@ export class UserService{
         }));
 }
    getUserById(id:number){
-     return this.http.get<IUser>(`${environment.baseUrl}/User/${id}`);
+     return  this.http.get<IUser>(`${environment.baseUrl}/User/${id}`);
    }
 }
 

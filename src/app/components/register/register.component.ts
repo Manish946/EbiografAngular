@@ -4,6 +4,7 @@ import { IAuthenticationUser } from 'src/app/Interface/IAuthenticationUser';
 import { UserService } from 'src/app/Services/User.service';
 import { Router,ActivatedRoute, RouterModule } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { HttpErrorResponse, HttpHeaderResponse } from '@angular/common/http';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -36,7 +37,7 @@ export class RegisterComponent implements OnInit {
 
 get userForm() {return this.RegisterForm.controls;}
 
-onRegister()
+async onRegister()
 {
   this.submitted = true;
   //stop here if form is invalid
@@ -45,14 +46,16 @@ onRegister()
   }
   this.loading = true;
   this.RegisterForm.value.phone = this.RegisterForm.value.phone.toString();
-  this.userService.register(this.RegisterForm.value)
+  await (await this.userService.register(this.RegisterForm.value))
   .pipe(first()).subscribe({next:()=>{
     this.router.navigate(['../login'],{relativeTo: this.route});
   },
-  error:error=>{
+  error:HttpErrorResponse=>{
     this.loading = false;
     this.registerError = true;
-  this.showErrorMessage = error.error.message;
+  this.showErrorMessage = HttpErrorResponse;
+
+
   }
 })
 }

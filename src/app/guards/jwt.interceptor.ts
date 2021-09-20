@@ -21,7 +21,6 @@ HttpInterceptor{
         request = request.clone({
           setHeaders:{
             Authorization:`Bearer ${user.token}`
-
           }
         });
       }

@@ -16,6 +16,16 @@ import { MyHistoryComponent } from './components/Content/Profile-content/my-hist
 import { EditProfileComponent } from './components/Content/Profile-content/edit-profile/edit-profile.component';
 import { JwtInterceptor } from './guards/jwt.interceptor';
 import { ErrorInterceptor } from './guards/error.interceptor';
+import { MoviesComponent } from './components/Content/movies/movies.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSelectModule} from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MovieDetailsComponent } from './components/Content/movies/movie-details/movie-details.component';
+import {MatButtonModule} from '@angular/material/button';
+import { MovieTicketComponent } from './components/Content/movies/movie-ticket/movie-ticket.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,15 +37,25 @@ import { ErrorInterceptor } from './guards/error.interceptor';
     NavbarComponent,
     MyprofileComponent,
     MyHistoryComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    MoviesComponent,
+    MovieDetailsComponent,
+    MovieTicketComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
-
+    FormsModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    MatSnackBarModule
   ],
   providers: [
      {provide:HTTP_INTERCEPTORS,useClass:

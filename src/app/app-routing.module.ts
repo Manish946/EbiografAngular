@@ -10,6 +10,8 @@ import { ProfileComponent } from './components/Content/profile/profile.component
 import { EditProfileComponent } from './components/Content/Profile-content/edit-profile/edit-profile.component';
 import { MyprofileComponent } from './components/Content/Profile-content/myprofile/myprofile.component';
 import { MyHistoryComponent } from './components/Content/Profile-content/my-history/my-history.component';
+import { MovieDetailsComponent } from './components/Content/movies/movie-details/movie-details.component';
+import { MovieTicketComponent } from './components/Content/movies/movie-ticket/movie-ticket.component';
 const routes: Routes = [
 {path:'home', component:HomeComponent},
 {path:'',redirectTo: 'home', pathMatch:'full'},
@@ -22,7 +24,9 @@ const routes: Routes = [
     {path:'my-history',component:MyHistoryComponent,outlet:'profile-content'},
     {path:'',redirectTo:'/profile/(profile-content:myprofile)',pathMatch:'full'}
 
-]}
+]},
+{path: 'movie/:id',component:MovieDetailsComponent},
+{path: 'movie/:movieID/show/:showID',component:MovieTicketComponent}
 
 ];
 

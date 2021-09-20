@@ -1,0 +1,212 @@
+<app-navbar></app-navbar>
+
+
+<div class="container" class="col-md-0 offset-md-1 mt-5" *ngIf="Movie && Show">
+  <div class="row">
+    <div class="col">
+      <div>
+        <strong style="font-size: 1.8em;"> {{Movie.title}}</strong>
+
+      </div>
+    </div>
+    <div class="col">
+    </div>
+
+
+    <div class="col">
+      <strong style="font-size: 1.2em;">Movie Hall</strong>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div>
+        <strong class="text-muted"> {{convertMinuteToHour(Movie.duration)}}</strong>
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <strong class="text-muted">{{ Show.date |date:'EE, d MMM'}}. &nbsp; {{Show.startTime |date:'hh:mm'}} -
+          {{Show.endTime |date:'hh:mm'}} </strong>
+      </div>
+      <strong class="text-muted"> Allowed for {{Movie.censorship}}</strong>
+    </div>
+    <div class="col">
+      <div>
+        <strong class="text-muted"> 2D Hall</strong>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div style="margin-top: 4%;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <strong style="font-size: 1.5em;">Choose Tickets</strong>
+    </div>
+    <div class="col">
+      <strong style="font-size: 1.5em;">Choose Hall Seats</strong>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <h3>Normal ticket</h3>
+          <h5>100 - 150 DKK</h5>
+        </div>
+        <div class="col">
+          <div class="qty mt-0">
+            <span class="minus bg-dark" (click)="onMinus(normalTicket,'normalTicket')">-</span>
+            <span class="count" id="normalTicket" >{{normalTicket}}</span>
+            <span class="plus bg-dark" (click)="onPlus(normalTicket,'normalTicket')">+</span>
+          </div>
+
+        </div>
+        <div class="col">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h3>Choose Snacks</h3>
+          <h3>Soft Drink 0.5L</h3>
+          <h3>Pop Corn </h3>
+
+          <h3>Snack Menu</h3>
+
+          <div>
+          </div>
+        </div>
+
+        <div class="col">
+          <h3>Quantity</h3>
+
+          <div class="qty">
+            <span class="minus bg-dark" (click)="onMinus(softDrink,'softDrink')">-</span>
+            <span class="count" id="softDrink" >{{softDrink}}</span>
+            <span class="plus bg-dark" (click)="onPlus(softDrink,'softDrink')">+</span>
+          </div>
+
+          <div class="qty mt-3">
+            <span class="minus bg-dark" (click)="onMinus(popCorn,'popCorn')">-</span>
+            <span class="count" id="popCorn" >{{popCorn}}</span>
+            <span class="plus bg-dark" (click)="onPlus(popCorn,'popCorn')">+</span>
+          </div>
+          <div class="qty mt-3">
+            <span class="minus bg-dark" (click)="onMinus(snackMenu,'snackMenu')">-</span>
+            <span class="count" id="snackMenu" >{{snackMenu}}</span>
+            <span class="plus bg-dark" (click)="onPlus(snackMenu,'snackMenu')">+</span>
+          </div>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <h1>Seats</h1>
+      <div class="moviehall">
+        <ul class="showcase">
+          <li>
+            <div class="seat"></div>
+            <small>N/A</small>
+          </li>
+
+          <li>
+            <div class="seat selected"></div>
+            <small>Selected</small>
+          </li>
+
+          <li>
+            <div class="seat occupied"></div>
+            <small>Occupied</small>
+          </li>
+        </ul>
+
+        <div class="container">
+          <div class="screen" style="display: flex;" ></div>
+          <div class="moviehall" >
+          <div class="row">
+            <div [ngClass]="{'selected': selected, '': !selected}" class="seat" (click)="onSelected()"></div>
+            <div class="seat selected"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+          </div>
+          <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat occupied"></div>
+            <div class="seat occupied"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+          </div>
+
+          <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat occupied"></div>
+            <div class="seat occupied"></div>
+          </div>
+
+          <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+          </div>
+
+          <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat occupied"></div>
+            <div class="seat occupied"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+          </div>
+
+          <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat occupied"></div>
+            <div class="seat occupied"></div>
+            <div class="seat occupied"></div>
+            <div class="seat"></div>
+          </div>
+        </div>
+        </div>
+
+        <p class="text">
+          You have selected <span id="count">0</span> seats for a price of $<span id="total">0</span>
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+

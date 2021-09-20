@@ -1,0 +1,32 @@
+<div class="col-md-10 offset-md-1 mt-7">
+
+<div class="container" >
+	<div class="movie-card" *ngFor="let movie of MoviesDisplay" >
+    <a [routerLink]="['/movie',movie.movieID]">
+		<div class="movie-header" style="background: url({{movie.imgLink}});">
+		</div><!--movie-header-->
+  </a>
+		<div class="movie-content">
+			<div class="movie-content-header">
+				<a [routerLink]="['/movie',movie.movieID]">
+					<h3 class="movie-title">{{movie.title}}</h3>
+				</a>
+				<div class="imax-logo"></div>
+			</div>
+			<div class="movie-info">
+				<div class="info-section">
+					<h4>Duration</h4>
+					<h5>{{convertMinuteToHour(movie.duration)}}</h5>
+				</div><!--date,time-->
+				<div class="info-section">
+					<h4>Release Date</h4>
+					<h5>{{ movie.releaseDate | date:'yyyy-MM-dd'}} </h5>
+				</div><!--screen-->
+			</div>
+      <div style="text-align: center; font-size: larger; color: rgb(13, 77, 77);">
+				<a [routerLink]="['/movie',movie.movieID]">	<h3>VIEW SHOW TIME </h3></a>
+      </div>
+		</div><!--movie-content-->
+	</div><!--movie-card-->
+</div><!--container-->
+</div>
