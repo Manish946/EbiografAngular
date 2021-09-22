@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div *ngIf="Movie && Payment && Show">
+
+<mat-card class="card" class="col-md-4 offset-md-4 mt-3">
+
+    <mat-card style="background-color: rgb(73, 108, 145); color: white;">
+      <h2>Movie Ticket Overview</h2>
+    </mat-card>
+    <br>
+  <mat-card>
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{Movie.imgLink}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h1 class="card-title">{{Movie.title}}</h1>
+          <h3 class="card-text" class="text-muted">Genres : {{Movie.genres}}</h3>
+          <h4 class="card-text" class="text-muted" > Start Time : {{ Show.date |date:'EE, d MMM'}}. &nbsp; {{Show.startTime |date:'hh:mm'}} - {{Show.endTime |date:'hh:mm'}}</h4>
+
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card style="background-color: rgb(46, 59, 73); color: white;">
+    <h2>Conformation</h2>
+    <h4>You are about to pay for tickets to {{Movie.title}} in Ebiograf.</h4>
+  </mat-card>
+</mat-card>
+
+<mat-card class="col-md-4 offset-md-4 mt-3" style="background-color: rgb(43, 44, 44); color: white;">
+  <span class="col offset-md-5">Total : {{Payment.amount}} Kr</span>
+  <button mat-raised-button color="accent" class="col offset-md-4" [routerLink]="['/movieticket',Payment.paymentID]">PAY</button>
+</mat-card>
+</div>

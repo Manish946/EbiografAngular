@@ -1,4 +1,4 @@
-export interface ICinemaSeats
+export interface ICinemaSeat
 {
   cinemaSeatID:number,
   seatNumber:number,

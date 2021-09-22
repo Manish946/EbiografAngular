@@ -26,6 +26,9 @@ import { MovieDetailsComponent } from './components/Content/movies/movie-details
 import {MatButtonModule} from '@angular/material/button';
 import { MovieTicketComponent } from './components/Content/movies/movie-ticket/movie-ticket.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { BookingNavComponent } from './components/Content/movies/movie-ticket/booking-nav/booking-nav.component';
+import {MatCardModule} from '@angular/material/card';
+import { TicketComponent } from './components/Content/movies/movie-ticket/bookingNav/ticket/ticket.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +43,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     EditProfileComponent,
     MoviesComponent,
     MovieDetailsComponent,
-    MovieTicketComponent
+    MovieTicketComponent,
+    BookingNavComponent,
+    TicketComponent
 
   ],
   imports: [
@@ -55,7 +60,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule
   ],
   providers: [
      {provide:HTTP_INTERCEPTORS,useClass:

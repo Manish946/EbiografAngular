@@ -12,6 +12,8 @@ import { MyprofileComponent } from './components/Content/Profile-content/myprofi
 import { MyHistoryComponent } from './components/Content/Profile-content/my-history/my-history.component';
 import { MovieDetailsComponent } from './components/Content/movies/movie-details/movie-details.component';
 import { MovieTicketComponent } from './components/Content/movies/movie-ticket/movie-ticket.component';
+import { BookingNavComponent } from './components/Content/movies/movie-ticket/booking-nav/booking-nav.component';
+import { TicketComponent } from './components/Content/movies/movie-ticket/bookingNav/ticket/ticket.component';
 const routes: Routes = [
 {path:'home', component:HomeComponent},
 {path:'',redirectTo: 'home', pathMatch:'full'},
@@ -26,8 +28,9 @@ const routes: Routes = [
 
 ]},
 {path: 'movie/:id',component:MovieDetailsComponent},
-{path: 'movie/:movieID/show/:showID',component:MovieTicketComponent}
-
+{path: 'movie/:movieID/show/:showID',component:MovieTicketComponent},
+{path: 'movie/:movieID/show/:showID/booking/:bookingID/ticket/:ticketID',component:BookingNavComponent},
+{path: 'movieticket/:paymentID',component:TicketComponent}
 ];
 
 @NgModule({
