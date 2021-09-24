@@ -1,4 +1,6 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ticket',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ticket.component.css']
 })
 export class TicketComponent implements OnInit {
+  qrValue!:string;
+  constructor(
+    private route:ActivatedRoute,
 
-  constructor() { }
+  ) { }
 
   ngOnInit(): void {
+   this.route.params.subscribe(params=> {this.qrValue = "Ticket:"+ params['paymentID'];});
+
   }
 
 }

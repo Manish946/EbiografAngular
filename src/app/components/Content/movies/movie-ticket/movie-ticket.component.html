@@ -134,17 +134,25 @@
             <div class="seat occupied"></div>
             <small>Occupied</small>
           </li>
+          <li>
+            <div class="seat vip"></div>
+            <small>VIP</small>
+          </li>
         </ul>
 
         <div class="container" *ngIf="ShowSeats">
-          <div class="screen" style="display: flex;"></div>
+          <div class="screen" style="display:inline-flex;"></div>
           <div class="moviehall">
+            <div >
             <div class="row">
-              <div *ngFor="let showseat of ShowSeats;"
-                [ngClass]="{'selected': showseat.active, '':!showseat.active,'occupied':showseat.bookingID}"
-                class="seat" (click)="onSelected(showseat)">
+              <div class="col-md-2 offset-md-0 mt-1" *ngFor="let showseat of ShowSeats; let i = index">
+              <div  [ngClass]="{'selected': showseat.active,'vip':showseat.status ==2 && !showseat.active,'':!showseat.active,'occupied':showseat.bookingID}"
+                class="seat" (click)="onSelected(showseat)" style="color: white;">
+                <h3>{{showseat.cinemaSeatID}}</h3>
 
               </div>
+            </div>
+
               <!--
               div ngfor
                 div med seat
@@ -155,66 +163,11 @@
 
              -->
             </div>
-            <div class="row">
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat occupied"></div>
-              <div class="seat occupied"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-            </div>
-
-            <div class="row">
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat occupied"></div>
-              <div class="seat occupied"></div>
-            </div>
-
-            <div class="row">
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-            </div>
-
-            <div class="row">
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat occupied"></div>
-              <div class="seat occupied"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-            </div>
-
-            <div class="row">
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat occupied"></div>
-              <div class="seat occupied"></div>
-              <div class="seat occupied"></div>
-              <div class="seat"></div>
-            </div>
           </div>
+
         </div>
 
-        <p class="text">
-          You have selected <span id="count">0</span> seats for a price of $<span id="total">0</span>
-        </p>
+
 
       </div>
 
@@ -227,7 +180,8 @@
 
 
 
-
+<br>
+<br>
 <mat-card  style="background-color: rgb(43, 42, 42); padding: 28px; color: white;" class="col-md-10 offset-md-1 mt-1">
   <div class="row">
     <div class="col">

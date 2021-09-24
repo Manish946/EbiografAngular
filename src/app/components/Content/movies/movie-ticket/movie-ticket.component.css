@@ -98,7 +98,9 @@ input:disabled{
 .seat.selected {
   background-color: #6feaf6;
 }
-
+.seat.vip{
+ background-color: purple;
+}
 .seat.occupied {
   background-color: rgb(190, 60, 60);
 }

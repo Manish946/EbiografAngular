@@ -27,7 +27,9 @@ import { Observable } from 'rxjs';
  getBookingById(id:number):Observable<IBooking>{
   return this.http.get<IBooking>(`${environment.baseUrl}/Booking/${id}`);
 }
-
+getBookingByUserId(id:number):Observable<IBooking[]>{
+  return this.http.get<IBooking[]>(`${environment.baseUrl}/Booking/User/${id}`);
+}
 createBooking(booking:IBooking){
   return this.http.post<IBooking>(`${environment.baseUrl}/Booking/CreateBooking`,booking);
 }

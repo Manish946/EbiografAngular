@@ -25,7 +25,7 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.user.subscribe(x=> this.user = x);
-    this.user = this.userService.userValue;
+   // this.user = this.userService.userValue;
     this.id = this.user.userID;
     // Password is not required in edit mode.
     const passwordValidators =[Validators.minLength(6)];

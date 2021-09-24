@@ -110,15 +110,17 @@ export class MovieTicketComponent implements OnInit {
   }
 
   onBooking(){
+    if(this.user){
+
     var savedSeats = JSON.parse(localStorage.getItem('SelectedSeats')!)|| [];
     this.storedSeat = savedSeats;
 
     if(this.normalTicket > 0 && this.storedSeat.length > 0){
-
+      var todayDate = new Date();
     var newbooking = this.booking ={
       status :1,
       showID : this.Show.showID,
-      timeStamp : new Date(),
+      timeStamp : todayDate,
       userID : this.user.userID,
       numberOfSeats : this.normalTicket
     }
@@ -133,8 +135,15 @@ export class MovieTicketComponent implements OnInit {
       }
      this.onOrderSnack(bookingresult.bookingID!);
      this.onPayment(bookingresult.bookingID!);
+     console.log(this.paymentID);
+
     });
+
   }
+}
+else{
+  this.router.navigate(['/login']);
+}
 
   }
   onPayment(bookingID:number){

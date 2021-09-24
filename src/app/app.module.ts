@@ -29,6 +29,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BookingNavComponent } from './components/Content/movies/movie-ticket/booking-nav/booking-nav.component';
 import {MatCardModule} from '@angular/material/card';
 import { TicketComponent } from './components/Content/movies/movie-ticket/bookingNav/ticket/ticket.component';
+import { QrCodeModule } from 'ng-qrcode';
+import {MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +63,9 @@ import { TicketComponent } from './components/Content/movies/movie-ticket/bookin
     MatNativeDateModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    QrCodeModule,
+    MatTableModule
   ],
   providers: [
      {provide:HTTP_INTERCEPTORS,useClass:
