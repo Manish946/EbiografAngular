@@ -3,7 +3,7 @@
 <div class="container" >
 	<div class="movie-card" *ngFor="let movie of MoviesDisplay" >
     <a [routerLink]="['/movie',movie.movieID]">
-		<div class="movie-header" style="background: url({{movie.imgLink}});">
+		<div class="movie-header" style="background: url({{movie.imgLink}}); background-size:cover; background-position: center; background-repeat: no-repeat; ">
 		</div><!--movie-header-->
   </a>
 		<div class="movie-content">
